@@ -1,6 +1,7 @@
 Board = []
 Board_Height = 10
 Board_Length = 10
+PrintBoard = """"""
 
 ## Lower ==> Higher
 ##   ||
@@ -8,7 +9,7 @@ Board_Length = 10
 ##   \/
 ## Higher
 
-def MakeBoard(Board, Board_Height, Board_Length): ## Do not use more than once
+def MakeBoard(Board, Board_Height, Board_Length, PrintBoard): ## Do not use more than once
     
     for y in range(Board_Height) : ## Creates dictionary ## List of lists
         Board.append([])           ## Will be y coord
@@ -37,6 +38,14 @@ def MakeBoard(Board, Board_Height, Board_Length): ## Do not use more than once
 
             else:
                 Board[y].append(" ")
+                
+#    for y in range(Board_Height):
+#        for x in range(Board_Length):
+#            PrintBoard += Board[y][x]
+#    
+#        PrintBoard += "\n"
+#  
+#    PrintBoard += "\r"
 
 
 def UpdateBoard(Board, Update_y, Update_x, Update): ## Updates board with new value
@@ -47,12 +56,25 @@ def UpdateBoard(Board, Update_y, Update_x, Update): ## Updates board with new va
 
             Board[Update_y][Update_x] = Update
 
-            
-        
-    
-    
-    
-            
-        
+#def GetPrintBoard(PrintBoard, Board):
+#
+#    for y in range(Board_Height):
+#        for x in range(Board_Length):
+#            PrintBoard += Board[y][x]
+#    
+#        PrintBoard += "\n"
+#  
+#    PrintBoard += "\r"
 
+MakeBoard(Board, Board_Height, Board_Length, PrintBoard)
+
+for y in range(Board_Height):
+    for x in range(Board_Length):
+        PrintBoard += Board[y][x]
     
+    PrintBoard += "\n"
+  
+PrintBoard += "\r"
+
+print(PrintBoard)
+print("Hello World!")
