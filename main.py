@@ -2,10 +2,10 @@ import time
 import msvcrt
 from Board import *
 
-KeyStroke = b"a"
+KeyStroke = b"w"
 
 Snake = ""
-Speed = 1
+Speed = 0.5
 
 SnakeHeadY = 12
 SnakeHeadX = 35
@@ -37,9 +37,6 @@ def SnakeMove(Board, PrintBoard, Snake, KeyStroke, SnakeHeadY, SnakeHeadX, Snake
             UpdateBoard(Board, SnakeHeadY - 1, SnakeHeadX, '"')
             UpdateBoard(Board, SnakeHeadY, SnakeHeadX, "0")
             SnakeHeadY = SnakeHeadY - 1
-
-            UpdateBoard(Board, SnakeTailY, SnakeTailX, " ")
-            SnakeTailY = SnakeTailY - 1
    
         elif KeyStroke == b"a" :
 
@@ -47,15 +44,26 @@ def SnakeMove(Board, PrintBoard, Snake, KeyStroke, SnakeHeadY, SnakeHeadX, Snake
             UpdateBoard(Board, SnakeHeadY, SnakeHeadX, "0")
             SnakeHeadX = SnakeHeadX - 1
 
-            UpdateBoard(Board, SnakeTailY, SnakeTailX, " ")
-            SnakeTailX = SnakeTailX - 1
-
         elif KeyStroke == b"s" :
             pass
 
         elif KeyStroke == b"d" :
-            pass    
+            pass
 
+        UpdateBoard(Board, SnakeTailY, SnakeTailX, " ")
+
+        if Board[SnakeTailY - 1][SnakeTailX] == "0":
+            SnakeTailY = SnakeTailY - 1
+
+        if Board[SnakeTailY + 1][SnakeTailX] == "0":
+            SnakeTailY = SnakeTailY + 1
+
+        if Board[SnakeTailY][SnakeTailX - 1] == "0":
+            SnakeTailX = SnakeTailX - 1
+
+        if Board[SnakeTailY][SnakeTailX + 1] == "0":
+            SnakeTailX = SnakeTailX + 1
+            
         GetPrintBoard(Board, PrintBoard)
             
 MakeBoard(Board, Board_Height, Board_Length)
