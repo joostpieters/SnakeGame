@@ -1,8 +1,8 @@
 import os
 
 Board = []
-Board_Height = 10
-Board_Length = 10
+Board_Height = 24
+Board_Length = 80
 PrintBoard = ""
 
 ## Lower ==> Higher
@@ -37,14 +37,11 @@ def MakeBoard(Board, Board_Height, Board_Length): ## Do not use more than once
             elif y == Board_Height - 1 :
                 Board[y].append("-")
                 
-
             else:
                 Board[y].append(" ")
 
-    UpdateBoard(Board, PrintBoard, 0, 0, 0)
 
-
-def UpdateBoard(Board, PrintBoard, Update_y, Update_x, Update): ## Updates board with new value
+def UpdateBoard(Board, Update_y, Update_x, Update): ## Updates board with new value
                                                     ## with Update_y and _x being the coords
     if Update_y != 0 and Update_y != Board_Height - 1 :
 
@@ -52,17 +49,17 @@ def UpdateBoard(Board, PrintBoard, Update_y, Update_x, Update): ## Updates board
 
             Board[Update_y][Update_x] = Update
 
+def GetPrintBoard(Board, PrintBoard):
+
     PrintBoard = ""
 
     for y in range(Board_Height):
         for x in range(Board_Length):
             PrintBoard += Board[y][x]
-    
-        PrintBoard += "\n"
+
+        if y < Board_Height - 1:
+            PrintBoard += "\n"
+
 
     os.system("cls")
     print(PrintBoard)
-
-
-
-
