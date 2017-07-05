@@ -1,8 +1,8 @@
 import os
 
 Board = []
-Board_Height = 24
-Board_Length = 80
+Board_Height = 23 ## Must be an odd number
+Board_Length = 79 ## Must be an odd number
 PrintBoard = ""
 
 ## Lower ==> Higher
@@ -36,7 +36,11 @@ def MakeBoard(Board, Board_Height, Board_Length): ## Do not use more than once
                 Board[y].append("-")
             elif y == Board_Height - 1 :
                 Board[y].append("-")
-                
+            
+            elif y % 2 == 0 and x % 2 == 0 :
+                print("True")
+                Board[y].append("X")
+            
             else:
                 Board[y].append(" ")
 
@@ -46,8 +50,10 @@ def UpdateBoard(Board, Update_y, Update_x, Update): ## Updates board with new va
     if Update_y != 0 and Update_y != Board_Height - 1 :
 
         if Update_x != 0 and Update_x != Board_Length - 1:
+            
+            if Board[Update_y][Update_x] != "X" :
 
-            Board[Update_y][Update_x] = Update
+                Board[Update_y][Update_x] = Update
 
 def GetPrintBoard(Board, PrintBoard):
 
