@@ -3,35 +3,60 @@ import msvcrt
 from Board import *
 
 KeyStroke = b"a"
+Suggested_KeyStroke = ""
 
 Snake = ""
-Speed = 0.5
+Speed = 0.1
 
-SnakeHeadY = 12
-SnakeHeadX = 35
+SnakeHeadY = 11
+SnakeHeadX = 36
 
-SnakeTailY = 12
-SnakeTailX = 39
+SnakeTailY = 11
+SnakeTailX = 40
 
 
 def SetUp(Board, PrintBoard, Snake) :
 
     Snake = ":0000"
-    y = 12
-    x = 35
+    y = 11
+    x = 36
     
     for i in Snake:
         UpdateBoard(Board, y, x, i)
         x +=1
     GetPrintBoard(Board, PrintBoard)
 
-def SnakeMove(Board, PrintBoard, Snake, KeyStroke, SnakeHeadY, SnakeHeadX, SnakeTailY, SnakeTailX):
+def SnakeMove(Board, PrintBoard, Snake, KeyStroke, Suggested_KeyStroke, SnakeHeadY, SnakeHeadX, SnakeTailY, SnakeTailX):
     while True :
 
         time.sleep(Speed)
 
         if msvcrt.kbhit():
-            KeyStroke = msvcrt.getch()
+            Suggested_KeyStroke = msvcrt.getch()
+        
+        if Suggested_KeyStroke == b"w" :
+            if not Board[SnakeHeadY - 1][SnakeHeadX] == "X" :
+                KeyStroke = Suggested_KeyStroke
+            else :
+                pass
+
+        elif Suggested_KeyStroke == b"a" :
+            if Board[SnakeHeadY][SnakeHeadX - 1] == "X" :
+                pass
+            else :
+                KeyStroke = Suggested_KeyStroke
+
+        elif Suggested_KeyStroke == b"s" :
+            if Board[SnakeHeadY + 1][SnakeHeadX] == "X" :
+                pass
+            else :
+                KeyStroke = Suggested_KeyStroke
+
+        elif Suggested_KeyStroke == b"d" :
+            if Board[SnakeHeadY][SnakeHeadX + 1] == "X" :
+                pass
+            else :
+                KeyStroke = Suggested_KeyStroke
 
         if KeyStroke == b"w" :
 
@@ -72,10 +97,11 @@ def SnakeMove(Board, PrintBoard, Snake, KeyStroke, SnakeHeadY, SnakeHeadX, Snake
             SnakeTailX = SnakeTailX + 1
             
         GetPrintBoard(Board, PrintBoard)
+        
             
 MakeBoard(Board, Board_Height, Board_Length)
 SetUp(Board, PrintBoard, Snake)
 
-SnakeMove(Board, PrintBoard, Snake, KeyStroke, SnakeHeadY, SnakeHeadX, SnakeTailY, SnakeTailX)
+SnakeMove(Board, PrintBoard, Snake, KeyStroke, Suggested_KeyStroke, SnakeHeadY, SnakeHeadX, SnakeTailY, SnakeTailX)
 
 time.sleep(1000)

@@ -38,7 +38,6 @@ def MakeBoard(Board, Board_Height, Board_Length): ## Do not use more than once
                 Board[y].append("-")
             
             elif y % 2 == 0 and x % 2 == 0 :
-                print("True")
                 Board[y].append("X")
             
             else:
@@ -49,7 +48,7 @@ def UpdateBoard(Board, Update_y, Update_x, Update): ## Updates board with new va
                                                     ## with Update_y and _x being the coords
     if Update_y != 0 and Update_y != Board_Height - 1 :
 
-        if Update_x != 0 and Update_x != Board_Length - 1:
+        if Update_x != 0 and Update_x != Board_Length - 1 :
             
             if Board[Update_y][Update_x] != "X" :
 
