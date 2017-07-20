@@ -35,28 +35,33 @@ def SnakeMove(Board, PrintBoard, Snake, KeyStroke, Suggested_KeyStroke, SnakeHea
             Suggested_KeyStroke = msvcrt.getch()
         
         if Suggested_KeyStroke == b"w" :
+            if KeyStroke == b"s" :
+                Suggested_KeyStroke = b"s"
+
             if not Board[SnakeHeadY - 1][SnakeHeadX] == "X" :
                 KeyStroke = Suggested_KeyStroke
-            else :
-                pass
-
+            
         elif Suggested_KeyStroke == b"a" :
-            if Board[SnakeHeadY][SnakeHeadX - 1] == "X" :
-                pass
-            else :
+            if KeyStroke == b"d" :
+                Suggested_KeyStroke = b"d"
+
+            if not Board[SnakeHeadY][SnakeHeadX - 1] == "X" :
                 KeyStroke = Suggested_KeyStroke
 
         elif Suggested_KeyStroke == b"s" :
-            if Board[SnakeHeadY + 1][SnakeHeadX] == "X" :
-                pass
-            else :
+            if KeyStroke == b"w" :
+                Suggested_KeyStroke = b"w"
+
+            if not Board[SnakeHeadY + 1][SnakeHeadX] == "X" :
                 KeyStroke = Suggested_KeyStroke
 
         elif Suggested_KeyStroke == b"d" :
-            if Board[SnakeHeadY][SnakeHeadX + 1] == "X" :
-                pass
-            else :
+            if KeyStroke == b"a" :
+                Suggested_KeyStroke = b"a"
+
+            if not Board[SnakeHeadY][SnakeHeadX + 1] == "X" :
                 KeyStroke = Suggested_KeyStroke
+
 
         if KeyStroke == b"w" :
 
