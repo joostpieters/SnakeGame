@@ -6,14 +6,19 @@ KeyStroke = b"a"
 Suggested_KeyStroke = ""
 
 Snake = ""
-Speed = 0.1
+Speed = 0.2
+
+MakeBoard(Board, Board_Height, Board_Length)
+
+GetFruitSpaces(Board, FruitSpaces)
+FruitY = FruitSpaces.index(random.choice(FruitSpaces))
+FruitX = FruitSpaces[FruitY][random.randint(0, (len(FruitSpaces[FruitY])- 1))]
 
 SnakeHeadY = 11
 SnakeHeadX = 36
 
 SnakeTailY = 11
 SnakeTailX = 40
-
 
 def SetUp(Board, PrintBoard, Snake) :
 
@@ -24,12 +29,22 @@ def SetUp(Board, PrintBoard, Snake) :
     for i in Snake:
         UpdateBoard(Board, y, x, i)
         x +=1
+
+    UpdateBoard(Board, FruitY, FruitX, "F")
     GetPrintBoard(Board, PrintBoard)
 
-def SnakeMove(Board, PrintBoard, Snake, KeyStroke, Suggested_KeyStroke, SnakeHeadY, SnakeHeadX, SnakeTailY, SnakeTailX):
+def Grow(SnakeHeadY, SnakeHeadX, FruitY, FruitX) :
+    
+    if SnakeHeadY == FruitY :
+        if SnakeHeadX == FruitX :
+
+            return True
+
+def SnakeMove(Board, PrintBoard, Snake, KeyStroke, Suggested_KeyStroke, SnakeHeadY, SnakeHeadX, SnakeTailY, SnakeTailX, FruitY, FruitX):
     while True :
 
         time.sleep(Speed)
+        
 
         if msvcrt.kbhit():
             Suggested_KeyStroke = msvcrt.getch()
@@ -90,23 +105,50 @@ def SnakeMove(Board, PrintBoard, Snake, KeyStroke, Suggested_KeyStroke, SnakeHea
         UpdateBoard(Board, SnakeTailY, SnakeTailX, " ")
 
         if Board[SnakeTailY - 1][SnakeTailX] == "0":
-            SnakeTailY = SnakeTailY - 1
+
+            if Grow(SnakeHeadY, SnakeHeadX, FruitY, FruitX) :
+                print("Grow")
+                FruitY = FruitSpaces.index(random.choice(FruitSpaces))
+                FruitX = FruitSpaces[FruitY][random.randint(0, (len(FruitSpaces[FruitY])- 1))]
+                UpdateBoard(Board, FruitY, FruitX, "F")
+            else:
+                SnakeTailY = SnakeTailY - 1
 
         elif Board[SnakeTailY + 1][SnakeTailX] == "0":
-            SnakeTailY = SnakeTailY + 1
+
+            if Grow(SnakeHeadY, SnakeHeadX, FruitY, FruitX) :
+                print("Grow")
+                FruitY = FruitSpaces.index(random.choice(FruitSpaces))
+                FruitX = FruitSpaces[FruitY][random.randint(0, (len(FruitSpaces[FruitY])- 1))]
+                UpdateBoard(Board, FruitY, FruitX, "F")
+            else:
+                SnakeTailY = SnakeTailY + 1
 
         elif Board[SnakeTailY][SnakeTailX - 1] == "0":
-            SnakeTailX = SnakeTailX - 1
+
+            if Grow(SnakeHeadY, SnakeHeadX, FruitY, FruitX) :
+                print("Grow")
+                FruitY = FruitSpaces.index(random.choice(FruitSpaces))
+                FruitX = FruitSpaces[FruitY][random.randint(0, (len(FruitSpaces[FruitY])- 1))]
+                UpdateBoard(Board, FruitY, FruitX, "F")
+            else:
+                SnakeTailX = SnakeTailX - 1
 
         elif Board[SnakeTailY][SnakeTailX + 1] == "0":
-            SnakeTailX = SnakeTailX + 1
+
+            if Grow(SnakeHeadY, SnakeHeadX, FruitY, FruitX) :
+                print("Grow")
+                FruitY = FruitSpaces.index(random.choice(FruitSpaces))
+                FruitX = FruitSpaces[FruitY][random.randint(0, (len(FruitSpaces[FruitY])- 1))]
+                UpdateBoard(Board, FruitY, FruitX, "F")
+            else:
+                SnakeTailX = SnakeTailX + 1
             
         GetPrintBoard(Board, PrintBoard)
         
-            
-MakeBoard(Board, Board_Height, Board_Length)
+    
 SetUp(Board, PrintBoard, Snake)
 
-SnakeMove(Board, PrintBoard, Snake, KeyStroke, Suggested_KeyStroke, SnakeHeadY, SnakeHeadX, SnakeTailY, SnakeTailX)
+SnakeMove(Board, PrintBoard, Snake, KeyStroke, Suggested_KeyStroke, SnakeHeadY, SnakeHeadX, SnakeTailY, SnakeTailX, FruitY, FruitX)
 
 time.sleep(1000)

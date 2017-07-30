@@ -1,4 +1,10 @@
 import os
+import random
+
+FruitSpaces = []
+
+FruitY = ""
+FruitX = ""
 
 Board = []
 Board_Height = 23 ## Must be an odd number
@@ -68,3 +74,26 @@ def GetPrintBoard(Board, PrintBoard):
 
     os.system("cls")
     print(PrintBoard)
+
+def GetFruitSpaces(Board, FruitSpaces) :
+
+    for y in range(Board_Height) :
+        FruitSpaces.append([])
+
+        for x in range(Board_Length) :
+
+            if Board[y][x] == " " :
+                FruitSpaces[y].append(x)
+                
+
+#def GetFruit(FruitY, FruitX) :
+                    
+#        FruitY = FruitSpaces.index(random.choice(FruitSpaces))
+#        FruitX = FruitSpaces[FruitY][random.randint(0, (len(FruitSpaces[FruitY])- 1))]
+
+#        print(FruitY)
+#        print(FruitX)
+#        UpdateBoard(Board, FruitY, FruitX, "F")
+            
+
+    
